@@ -1,0 +1,77 @@
+slogan: "你這個人真的很怪."
+
+theme: bootstrap
+inverse: true
+
+menu:
+  - title: 存檔
+    url: archives
+    intro: "查看所有文章."
+    icon: "fa fa-archive"
+  - title: 分類
+    url: categories
+    intro: "查看所有分類."
+    icon: "fa fa-folder"
+  - title: 標籤
+    url: tags
+    intro: "查看所有標籤."
+    icon: "fa fa-tags"
+  - title: Wiki
+    url: wiki
+    intro: "筆記整理."
+    icon: "fa fa-tasks"
+  - title: 關於
+    url: about
+    intro: "關於本站."
+    icon: "fa fa-user"
+
+links:
+  - title: Gofan's Blog
+    url: https://bingofan.github.io
+    intro: "Freemind's Github repository."
+    icon: "fa fa-github"
+  - title: "My Github"
+    url: https://github.com/bingofan
+    intro: "My Github account."
+    icon: "fa fa-github"
+  - title: "My LinkedIn"
+    url: http://www.linkedin.com
+    intro: "My Linkin account."
+    icon: "fa fa-linkedin"
+
+excerpt_link: 閱讀全文
+
+widgets:
+- search
+- category
+- tagcloud
+- recent_posts  
+- links
+
+twitter: #右边栏要显示twitter展示的话，需要在此设置
+  username: gofan
+  show_replies: false
+  tweet_count: 5
+
+rss: atom.xml
+fancybox: true
+favicon: favicon.png
+fold: true
+duoshuo_shortname:
+scratch_name: DefaultNote
+
+# Analytics
+google_analytics:
+  enable: false
+  siteid:
+baidu_tongji:
+  enable: false
+  siteid:
+
+# search
+# swiftype_key: ZP2ZSuHgipSZfRyU8uTR
+
+# share widgets
+bdshare: true
+jiathis: false
+

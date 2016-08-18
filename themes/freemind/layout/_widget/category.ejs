@@ -1,0 +1,24 @@
+<% if (site.categories.length){ %>
+<%
+	String.prototype.startWith = function(s) {
+		if(s==null||s==""||this.length==0||s.length>this.length)
+			return false;
+		if(this.substr(0,s.length)==s)
+			return true;
+		else
+			return false;
+		return true;
+	}
+	var _WIKITAG = 'wiki-';
+%>
+	<div class="widget">
+		<h4><%= __('categories') %></h4>
+		<ul class="tag_box inline list-unstyled">
+		<% site.categories.sort('name').each(function(item){
+		if ( !item.name.startWith(_WIKITAG) ) {%>
+			<li><a href="<%- config.root %><%- item.path %>"><%= item.name %><span><%= item.posts.length %></span></a></li>
+		<% }
+			}); %>
+		</ul>
+	</div>
+<% } %>
