@@ -2,6 +2,7 @@
 title: Java 中的类型转换
 tags: Java
 categories: Java
+toc: true
 description: >-
   本文用于摘要和记录Java语言中一些类型转换相关内容.   部分内容转载自[java
   int转String所有方式的效率对比与深入解析](http://blog.csdn.net/self_study/article/details/50880110)
@@ -9,7 +10,9 @@ date: 2016-09-01 15:03:52
 ---
 
 
-### String 和 int 转换 ###
+## String 和 int 转换 ##
+
+### int >>> String ###
 
 **三种方式** 按效率排序
 
@@ -203,5 +206,26 @@ private static final char[] ONES = {
 从代码角度来看，这个算法在数字小于100的和大于100的处理方式是不一样的，小于100的快速计算法执行时间会远远短于大于100的方式
 
 
+### String >>> int ###
 
+**两种方式** 按效率排序
 
+1.`int i = Integer.parseInt([String]);`
+2.`int i = Integer.valueOf([String]).initValue();`
+
+方法1
+//直接使用静态方法，不会产生多余的对象，但会抛出异常
+方法2
+//Integer.valueOf(s) 相当于 new Integer(Integer.parseInt(s))，也会抛异常，但会多产生一个对象
+
+**源码调用方式**
+
+Integer.parseInt(a)
+
+`Integer.parseInt(a)` -> `parseInt(a, 10);` -> `parse(a, firstDigitIndex, radix, firstChar == '-');`
+
+Integer.valueOf(a).initValue()
+
+`Integer.valueOf(a)` -> `Integer.valueOf(parseInt(string)).initValue()` -> `parseInt(a, 10);` -> `parse(a, firstDigitIndex, radix, firstChar == '-');`
+
+从源码可以清楚的看到其实方法2就是多新建了一个Integer对象存储了int数据而已.实际调用的都一样的.
