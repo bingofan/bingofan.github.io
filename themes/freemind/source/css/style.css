@@ -202,7 +202,7 @@ a.search-result-title {
 }
 
 p.search-result {
-  color=#555;
+  color: #555;
 }
 
 em.search-keyword {
@@ -502,7 +502,47 @@ h4 {
 .line{
   height: 20px;
 }
+/* 支持代码高亮 */
+pre {
+  background: inherit;
+  border: 1px solid #ccc;
+  overflow-x: auto;
+  padding: .5em;
+  position: relative;
+  margin: 0 0 0.8em 0;
+  overflow-y: hidden;
+}
+pre code {
+  margin: -0.5em !important;
+  padding: 0.5em !important;
+  font-size: 1.0em;
+  overflow-y: auto;
+  overflow-x: auto;
+  display: block;
+}
 
+code.has-numbering {
+  margin-left: 1.7em !important; /*因为显示行号，所以离左边有一定的距离*/
+  word-wrap: normal;
+  word-break: keep-all;
+  white-space: pre;
+}
+
+.pre-numbering {
+  position: absolute; /*绝对定位*/
+  top: 0;
+  left: 0;
+  width: 2.2em; /*行号的宽度*/
+  height: 100%;
+  padding: 0.5em 0.2em 0.5em 0; /*上下padding保持与<code>一致，不然出现错位*/
+  border-right: 1px solid #C3CCD0;
+  border-radius: 3px 0 0 3px;
+  background-color: #EEE;
+  text-align: right;
+  font-size: 1.0em; /*字体大小与<code>一致*/
+  color: #AAA;
+  list-style: none;
+}
 /* =============================================================================
    Tables
    ========================================================================== */
