@@ -7,7 +7,7 @@
 <script src="<%- config.root %>js/gallery.js"></script>
 <script src="<%- config.root %>js/bootstrap.min.js"></script>
 <script src="<%- config.root %>js/main.js"></script>
-<script src="<%- config.root %>js/search.js"></script>
+<!--<script src="<%- config.root %>js/search.js"></script>-->
 <!-- after footer, some 3rd script place here -->
 
 <script src="<%- config.root %>js/hljs.js"></script>
@@ -23,7 +23,7 @@
 </script>
 <% } %>
 
-<% if (config.search) { %>
+<% if (theme.search) { %>
    <script type="text/javascript">      
      var search_path = "<%= config.search.path %>";
 	 if (search_path.length == 0) {

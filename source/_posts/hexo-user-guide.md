@@ -337,7 +337,8 @@ content
 
 
 ### 生成器 服务器
-```
+
+```shell
 hexo clean
 hexo generate
 hexo server

@@ -42,7 +42,7 @@ links:
 excerpt_link: 閱讀全文
 
 widgets:
-- search
+#- search
 - category
 - tagcloud
 - recent_posts  
@@ -55,6 +55,7 @@ twitter: #右边栏要显示twitter展示的话，需要在此设置
 
 rss: atom.xml
 fancybox: true
+search: false
 favicon: favicon.png
 fold: true
 duoshuo_shortname:
@@ -74,4 +75,3 @@ baidu_tongji:
 # share widgets
 bdshare: true
 jiathis: false
-
