@@ -6,7 +6,7 @@
   if (typeof hljs_labels === 'undefined') {
     hljs_labels = {};
   }
-  
+
   var code_caption_selector = '.code-caption';
 
   $(code_caption_selector).each(function(i, target) {
@@ -14,15 +14,15 @@
     if (ds.hide) {
       $(this).css('display', 'none');
     }
-    
+
     var label = $(this).find(code_caption_selector + '-label');
     $(label).prepend(hljs_labels.left || ds.labels_left);
     $(label).append(hljs_labels.right || ds.labels_right);
-    
+
     var copy = $(this).find(code_caption_selector + '-copy');
     var tip = hljs_labels.copy || $(copy).text();
-    $(copy).html('<i class="icon nova-copy"></i>').attr("title", tip);
-    
+    $(copy).html('<i class="fa fa-clipboard"></i>').attr("title", tip);
+
     // if (ds.label_position === 'outer')
     {
       $(this).next('p').remove();
@@ -37,42 +37,26 @@
   });
 
   $('.mypage pre code').each(function(i, block) {
-    var lines = $(this).text().split('\n').length - 1;
+    var ds = $(this).parent().prev(code_caption_selector).data();
+    var texts = $(this).text().split('\n');
+
+    var tab = texts[0].match(/^\s{0,}/);
+    if (tab) {
+      var arr = [];
+      texts.forEach(function(temp) {
+        arr.push(temp.replace(tab, ''));
+      });
+      $(this).text(arr.join('\n'));
+    }
+
+    var lines = texts.length - 1;
     var $numbering = $('<ul/>').addClass('pre-numbering');
-    $(this)
-        .addClass('has-numbering')
-        .parent()
-        .append($numbering);
-    for(i=1;i<=lines;i++){
+    $(this).addClass('has-numbering').parent().append($numbering);
+    for (i = 1; i <= lines; i++) {
       $numbering.append($('<li/>').text(i));
     }
-    hljs.highlightBlock(block);
-  });
-  //
-  //$('.article pre code').each(function(i, block) {
-  //  var ds = $(this).parent().prev(code_caption_selector).data();
-  //  var texts = $(this).text().split('\n');
-  //  if (ds.trim_indent === 'frontend') {
-  //    console.log("trim indent in front-end");
-  //    var tab = texts[0].match(/^\s{0,}/);
-  //    if (tab) {
-  //      var arr = [];
-  //      texts.forEach(function(temp) {
-  //        arr.push(temp.replace(tab, ''));
-  //      });
-  //      $(this).text(arr.join('\n'));
-  //    }
-  //  }
-  //
-  //  console.log("show line number in front-end");
-  //  var lines = texts.length - 1;
-  //  var $numbering = $('<ul/>').addClass('pre-numbering');
-  //  $(this).addClass('has-numbering').parent().append($numbering);
-  //  for (i = 1; i <= lines; i++) {
-  //    $numbering.append($('<li/>').text(i));
-  //  }
-  //
-  //  hljs.highlightBlock(block);
-  //});
 
+    hljs.highlightBlock(block);
+
+  });
 })(jQuery);

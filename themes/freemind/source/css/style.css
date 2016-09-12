@@ -543,6 +543,34 @@ code.has-numbering {
   color: #AAA;
   list-style: none;
 }
+
+@media (max-width: 767px) {
+    .pre-numbering {
+        display: none;
+    }
+    .has-numbering {
+        margin-left: -10px !important;
+        word-wrap: break-word !important;
+        white-space: pre-wrap !important;
+    }
+}
+
+.code-caption {
+    clear: both;
+    position: relative;
+    top: 0; /*empty p height*/
+}
+
+.code-caption .code-caption-label {
+    font-style: italic;
+    font-weight: bold;
+}
+
+.code-caption .code-caption-copy {
+    float: right;
+@include user-select-none();
+}
+
 /* =============================================================================
    Tables
    ========================================================================== */
