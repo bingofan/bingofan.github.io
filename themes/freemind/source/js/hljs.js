@@ -27,8 +27,9 @@
     {
       $(this).next('p').remove();
     }
+
     $(copy).zclip({
-      path : 'http://cdn.bootcss.com/zclip/1.1.2/ZeroClipboard.swf',
+      path : '/js/ZeroClipboard.swf',
       copy : function() {
         var code = $(target).next('pre').children('code').get(0);
         return code.innerText;

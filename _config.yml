@@ -50,7 +50,7 @@ hljs:
   label:
     left: Code
     right: ':'
-    copy: Copy Code
+    copy:
 
 # Category & Tag
 default_category: uncategorized
