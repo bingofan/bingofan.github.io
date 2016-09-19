@@ -263,7 +263,7 @@ _（7）Image_
 插入图片，可以自定义大小
 
 ```
-{% img [class names] /path/to/image [width] [height] [title text [alt text]] %}
+img [class names] /path/to/image [width] [height] [title text [alt text]]
 
 ```
 
@@ -272,7 +272,7 @@ _（8）Link_
 插入带有target="_blank"属性值的链接。
 
 ```
-{% link text url [external] [title] %}
+link text url [external] [title]
 
 ```
 
