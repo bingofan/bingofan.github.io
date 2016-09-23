@@ -13,6 +13,7 @@ categories:
 听说可以优化网站性能,我就试试.
 logo很好看
 ![gulp logo](\images\hexo\gulp-2x.png =150)
+
 ### gulp安装
 
 **gulp常用网址**
@@ -111,7 +112,7 @@ cnpm install gulp -g
     "gulp-uglify": "^1.5.3",
 ```
 
-###配置gulpfile.js文件
+### 配置gulpfile.js文件
 `gulpfile.js`是`gulp`项目的配置文件，是位于项目根目录的普通js文件（其实将`gulpfile.js`放入其他文件夹下亦可）。
 gulpfile.js
 ```javascript
