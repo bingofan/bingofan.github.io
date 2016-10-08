@@ -61,8 +61,24 @@ listview的左右删除
 ### zip4j
 压缩文件处理解决方案
 
+## 知识点
+
+### RecyclerView
+RecyclerView的理解及使用
+
 ### ThreadPool
 线程池的使用
+
+### groovy
+
+### gradle
+
+[【Gradle教程】](http://ask.android-studio.org/?/article/7)
+
+[【Gradle教程（英文原版）】](https://docs.gradle.org/current/userguide/introduction.html)
+
+### Android Studio 自定义插件开发
+
 
 ## 工具
 ### ClassyShark
