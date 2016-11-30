@@ -1,0 +1,465 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Hexo使用笔记 | Gofan Blog</title>
+  <meta name="author" content="Gofan">
+  
+  <meta name="description" content="记录平时常用的一些Hexo命令. 部分转载[Hexo Docs](http://www.ituring.com.cn/article/198930) [官方文档](https://hexo.io/docs/)">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Hexo使用笔记"/>
+  <meta property="og:site_name" content="Gofan Blog"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="Gofan Blog" type="application/atom+xml">
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+
+  <!-- CSS -->
+  
+  <link rel="stylesheet" href="/css/themes/bootstrap.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <!--<link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">-->
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.6.0/styles/solarized-light.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+  <script src="/js/jquery-2.0.3.min.js"></script>
+  <script src="//cdn.bootcss.com/zclip/1.1.2/jquery.zclip.min.js"></script>
+
+  <!-- analytics -->
+  
+
+
+
+</head>
+
+ <body>
+  <nav id="main-nav" class="navbar navbar-inverse navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+       <a class="navbar-brand" href="/">Gofan Blog</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="查看所有文章.">
+			  <i class="fa fa-archive"></i>存檔
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="查看所有分類.">
+			  <i class="fa fa-folder"></i>分類
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="查看所有標籤.">
+			  <i class="fa fa-tags"></i>標籤
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/wiki" title="筆記整理.">
+			  <i class="fa fa-tasks"></i>Wiki
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="關於本站.">
+			  <i class="fa fa-user"></i>關於
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header page-header-inverse ">		
+			<h1 class="title title-inverse "> Hexo使用笔记</h1>
+		</div>		
+	
+
+
+
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  
+		 <div class="alert alert-success description">
+			<i class="fa fa-info-circle"></i> <p>记录平时常用的一些Hexo命令. 部分转载<a href="http://www.ituring.com.cn/article/198930">Hexo Docs</a> <a href="https://hexo.io/docs/">官方文档</a></p>
+			
+		 </div> <!-- alert -->
+	  		
+
+	  <h3 id="新建文章"><a href="#新建文章" class="headerlink" title="新建文章"></a>新建文章</h3><pre><code class="shell">hexo new [layout] &lt;title&gt;
+</code></pre>
+<p><strong>[layout]</strong><br><code>post</code>  source/_posts<br><code>page</code>  source<br><code>draft</code> source/_draft</p>
+<h3 id="前置申明"><a href="#前置申明" class="headerlink" title="前置申明"></a>前置申明</h3><pre><code class="shell">title: Hexo使用笔记
+tags: Hexo
+categories: Hexo
+toc: true
+description: &gt;-
+    记录平时常用的一些Hexo命令.
+</code></pre>
+<ul>
+<li><code>:title</code> 文章标题</li>
+<li><code>:tags</code> 文章标签</li>
+<li><code>:categories</code> 文章分类</li>
+<li><code>:toc</code> 是否生成目录</li>
+<li><code>description</code> 文章摘要</li>
+<li><code>layout</code> 布局</li>
+<li><code>date</code> 创建时间</li>
+<li><code>updated</code> 修改时间</li>
+<li><code>comments</code> 是否开启评论，默认为true </li>
+<li><code>permalink</code> 文章永久链接</li>
+</ul>
+<a id="more"></a>
+<p>多级标签及分类</p>
+<pre><code class="shell">categories: 
+- Sports
+- Baseball
+tags:
+- Injury
+- Fight
+- Shocking
+</code></pre>
+<h3 id="草稿发布"><a href="#草稿发布" class="headerlink" title="草稿发布"></a>草稿发布</h3><pre><code class="shell">hexo publish [layout] &lt;title&gt;
+</code></pre>
+<h3 id="模-板"><a href="#模-板" class="headerlink" title="模 板"></a>模 板</h3><p><code>scaffolds</code>文件夹下</p>
+<pre><code>hexo new [templet] &lt;title&gt;
+</code></pre><h3 id="标签插件"><a href="#标签插件" class="headerlink" title="标签插件"></a>标签插件</h3><p><em>（1）Block Quote-块引用</em></p>
+<p>插入带有作者信息的应用，体现在Html上就是在<code>blockquote</code>标签下加入了<code>footer</code>标签。但是会给文章带来不一样的显示效果，书写格式非常简单。</p>
+<pre><code>{% blockquote [author[, source]] [link] [source_link_title] %}
+content
+{% endblockquote %}
+</code></pre><p><em>（2）Freemind样式</em></p>
+<p>1.文本</p>
+<pre><code>{% textcolor muted %}
+Fusce dapibus, tellus ac cursus commodo, tortor mauris nibh.
+{% endtextcolor %}
+
+{% textcolor primary %}
+Nullam id dolor id nibh ultricies vehicula ut id elit.
+{% endtextcolor %}
+
+{% textcolor success %}
+Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+{% endtextcolor %}
+
+{% textcolor info %}
+Maecenas sed diam eget risus varius blandit sit amet non magna.
+{% endtextcolor %}
+
+{% textcolor warning %}
+Etiam porta sem malesuada magna mollis euismod.
+{% endtextcolor %}
+
+{% textcolor danger %}
+Donec ullamcorper nulla non metus auctor fringilla.
+{% endtextcolor %}
+</code></pre><p class="text-muted">Fusce dapibus, tellus ac cursus commodo, tortor mauris nibh.</p>
+
+<p class="text-primary">Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+<p class="text-success">Duis mollis, est non commodo luctus, nisi erat porttitor ligula.</p>
+
+<p class="text-info">Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
+<p class="text-warning">Etiam porta sem malesuada magna mollis euismod.</p>
+
+<p class="text-danger">Donec ullamcorper nulla non metus auctor fringilla.</p>
+<p>.</p>
+<p>2.按钮</p>
+<pre><code>{% btn http://hahack.com hahack %}
+
+{% btn http://hahack.com hahack primary %}
+
+{% btn http://hahack.com hahack success %}
+
+{% btn http://hahack.com hahack warning %}
+
+{% btn http://hahack.com hahack danger %}
+
+{% btn http://hahack.com hahack info %}
+</code></pre><a class="btn btn-default" href="http://hahack.com" target="_blank" rel="external">hahack</a>
+<a class="btn btn-primary" href="http://hahack.com" target="_blank" rel="external">hahack</a>
+<a class="btn btn-success" href="http://hahack.com" target="_blank" rel="external">hahack</a>
+<a class="btn btn-warning" href="http://hahack.com" target="_blank" rel="external">hahack</a>
+<a class="btn btn-danger" href="http://hahack.com" target="_blank" rel="external">hahack</a>
+<a class="btn btn-info" href="http://hahack.com" target="_blank" rel="external">hahack</a>
+<p>.</p>
+<p>3.标签</p>
+<pre><code>{% label default %}
+
+{% label warinng warning %}
+
+{% label success success %}
+
+{% label danger danger %}
+
+{% label primary primary %}
+
+{% label info info %}
+</code></pre><span class="label label-default">default</span>
+<span class="label label-warning">warinng</span>
+<span class="label label-success">success</span>
+<span class="label label-danger">danger</span>
+<span class="label label-primary">primary</span>
+<span class="label label-info">info</span>
+<p>.</p>
+<p>4.徽章（Badges)</p>
+<pre><code>{% badge 42 %}
+</code></pre><span class="badge">42</span>
+<p>.</p>
+<p>5.警报（Alerts)</p>
+<pre><code>{% alert warning %}
+Best check yo self, you're not looking too good.
+{% endalert %}
+
+{% alert danger %}
+Change a few things up and try submitting again.
+{% endalert %}
+
+{% alert success %}
+You successfully read this important alert message.
+{% endalert %}
+
+{% alert info %}
+This alert needs your attention, but it's not super important.
+{% endalert %}
+</code></pre><div class="alert alert-warning"><i class="fa fa-bell"></i>  Best check yo self, you're not looking too good.</div>
+<div class="alert alert-danger"><i class="fa fa-bug"></i>  Change a few things up and try submitting again.</div>
+<div class="alert alert-success"><i class="fa fa-lightbulb-o"></i>  You successfully read this important alert message.</div>
+<div class="alert alert-info"><i class="fa fa-info"></i>  This alert needs your attention, but it's not super important.</div>
+<p><em>（3）Pull Quote</em></p>
+<p>这个插件可以帮助您在文章中插入重要引述。</p>
+<pre><code>{% pullquote [class] %}
+content
+{% endpullquote %}
+</code></pre><p><em>（4）jsFiddle</em></p>
+<p>在文章中嵌入jsFiddle片段。</p>
+<pre><code>{% jsfiddle shorttag [tabs] [skin] [width] [height] %}
+</code></pre><p><em>（5）Gist</em></p>
+<p>嵌入Gist片段</p>
+<pre><code>{% gist gist_id [filename] %}
+</code></pre><p><em>（6）iFrame</em></p>
+<p>插入网页框架</p>
+<pre><code>{% iframe url [width] [height] %}
+</code></pre><p><em>（7）Image</em></p>
+<p>插入图片，可以自定义大小</p>
+<pre><code>img [class names] /path/to/image [width] [height] [title text [alt text]]
+</code></pre><p><em>（8）Link</em></p>
+<p>插入带有target=”_blank”属性值的链接。</p>
+<pre><code>link text url [external] [title]
+</code></pre><p><em>（9）Include Code</em></p>
+<p>从资源目录中插入代码片段。</p>
+<pre><code>{% include_code [title] [lang:language] path/to/file %}
+</code></pre><p><em>（10）Youtube</em></p>
+<p>在文章中插入Youtube视频。天朝的孩子就不用试了</p>
+<pre><code>{% youtube video_id %}
+</code></pre><p><em>（11）Vimeo</em></p>
+<p>在文章中插入Vimeo视频。</p>
+<pre><code>{% vimeo video_id %}
+</code></pre><p><em>（12）Include Posts</em></p>
+<p>包含其他文章的链接。</p>
+<pre><code>{% post_path slug %}
+{% post_link slug [title] %}
+</code></pre><p><em>（13）Include Assets</em></p>
+<p>包含文章资源。<em>(具体怎么使用，还不太明白，后续再补充)</em></p>
+<pre><code>{% asset_path slug %}
+{% asset_img slug [title] %}
+{% asset_link slug [title] %}
+</code></pre><p><em>（14）Raw</em></p>
+<p>一些内容不想被主题渲染，可以使用该插件呈现原始状态。</p>
+<pre><code>{% raw %}
+content
+{% endraw %}
+</code></pre><h3 id="生成器-服务器"><a href="#生成器-服务器" class="headerlink" title="生成器 服务器"></a>生成器 服务器</h3><pre><code class="shell">hexo clean
+hexo generate
+hexo server
+hexo deploy
+</code></pre>
+<p>可以通过<code>http://localhost:4000</code>或者<code>http://0.0.0.0:4000</code>访问<br>.</p>
+<p><strong>指定IP</strong><br><code>hexo server -i 192.168.1.1</code><br>.</p>
+<p><strong>指定端口</strong><br><code>hexo server -p 5000</code><br>.</p>
+<p><strong>生成后马上部署</strong><br><code>hexo g -d</code> or <code>hexo d -g</code><br>.</p>
+<p><strong>部署配置</strong></p>
+<pre><code class="shell">deploy:
+    type: git
+    repo: https://github.com/pengloo53/pengloo53.github.io.git
+    branch: master
+</code></pre>
+	  
+	</div>
+
+	<div>
+  	<center>
+	<div class="pagination">
+<ul class="pagination">
+	 
+				
+    	<li class="prev"><a href="/2016/09/19/android-appcompat-v7/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i>上一页</a></li>
+  		
+
+        <li><a href="/archives"><i class="fa fa-archive"></i>Archive</a></li>
+
+		
+		   <li class="next"><a href="/2016/09/01/java-string-to-int/" class="alignright next">下一页<i class="fa fa-arrow-circle-o-right"></i></a></li>         
+        
+	
+</ul>
+</div>
+
+    </center>
+	</div>
+
+    <!-- share -->
+    
+        
+
+        
+
+    
+	
+	<!-- comment -->
+	
+<section id="comment">
+  <h2 class="title">留言</h2>
+
+  
+</section>
+
+	</div> <!-- col-md-9/col-md-12 -->
+		
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2016-09-06 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/Hexo/">Hexo<span>1</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/Hexo/">Hexo<span>1</span></a></li>
+    </ul>
+	</div>
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	   <a data-toggle="collapse" data-target="#toc"><i class="fa fa-bars"></i></a>
+	   <div id="toc" class="toc collapse in">
+			<ol class="toc-article"><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#新建文章"><span class="toc-article-text">新建文章</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#前置申明"><span class="toc-article-text">前置申明</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#草稿发布"><span class="toc-article-text">草稿发布</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#模-板"><span class="toc-article-text">模 板</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#标签插件"><span class="toc-article-text">标签插件</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#生成器-服务器"><span class="toc-article-text">生成器 服务器</span></a></li></ol>
+		</div>
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+	</div>
+		
+
+</div><!-- row -->
+
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  &copy; 2016 Gofan
+  
+      with help from <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a href="http://github.com/wzpan/hexo-theme-freemind/">Freemind</a>.    
+</p> </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<!--<script src="/js/search.js"></script>-->
+<!-- after footer, some 3rd script place here -->
+
+<script src="/js/hljs.js"></script>
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+</body>
+   </html>

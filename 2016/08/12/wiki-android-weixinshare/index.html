@@ -1,0 +1,686 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>安卓微信朋友圈分享功能 | Gofan Blog</title>
+  <meta name="author" content="Gofan">
+  
+  <meta name="description" content="实现安卓微信朋友圈分享功能记录.">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="安卓微信朋友圈分享功能"/>
+  <meta property="og:site_name" content="Gofan Blog"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="Gofan Blog" type="application/atom+xml">
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+
+  <!-- CSS -->
+  
+  <link rel="stylesheet" href="/css/themes/bootstrap.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <!--<link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">-->
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.6.0/styles/solarized-light.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+  <script src="/js/jquery-2.0.3.min.js"></script>
+  <script src="//cdn.bootcss.com/zclip/1.1.2/jquery.zclip.min.js"></script>
+
+  <!-- analytics -->
+  
+
+
+
+</head>
+
+ <body>
+  <nav id="main-nav" class="navbar navbar-inverse navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+       <a class="navbar-brand" href="/">Gofan Blog</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="查看所有文章.">
+			  <i class="fa fa-archive"></i>存檔
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="查看所有分類.">
+			  <i class="fa fa-folder"></i>分類
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="查看所有標籤.">
+			  <i class="fa fa-tags"></i>標籤
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/wiki" title="筆記整理.">
+			  <i class="fa fa-tasks"></i>Wiki
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="關於本站.">
+			  <i class="fa fa-user"></i>關於
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header page-header-inverse ">		
+			<h1 class="title title-inverse "> 安卓微信朋友圈分享功能</h1>
+		</div>		
+	
+
+
+
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  
+		 <div class="alert alert-success description">
+			<i class="fa fa-info-circle"></i> <p>实现安卓微信朋友圈分享功能记录.</p>
+			
+		 </div> <!-- alert -->
+	  		
+
+	  <h3 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h3><p>阅读<a href="https://open.weixin.qq.com/cgi-bin/showdocument?action=dir_list&amp;t=resource/res_list&amp;verify=1&amp;id=1417751808&amp;token=&amp;lang=zh_CN" target="_blank" rel="external">微信的官方文档</a> 在官方文档的内容里罗列了微信WPI开发的基本步骤.<br>1.申请你的AppID<br>2.下载微信终端开发工具包<br><a href="https://open.weixin.qq.com/cgi-bin/showdocument?action=dir_list&amp;t=resource/res_list&amp;verify=1&amp;id=open1419319167&amp;lang=zh_CN" target="_blank" rel="external">SDK的下载</a><br>3.搭建开发环境<br>4.在代码中使用开发工具包<br>这里有一个Demo程序蛮重要的,很简练.<br><a id="more"></a></p>
+<h3 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h3><p>点击右上角分享按钮,弹出下拉框,选择相应”微信”或者”朋友圈”<br>调出微信APP进行相关内容的分享.<br><img src="\images\wiki\wiki-android-weixinshare\1.png" alt="微信分享上拉选项"></p>
+<h3 id="导入SDK包"><a href="#导入SDK包" class="headerlink" title="导入SDK包"></a>导入SDK包</h3><p>1.将开发工具包中libs目录下的libammsdk.jar复制到项目的lib目录中<br><img src="\images\wiki\wiki-android-weixinshare\3.png" alt="工程导入包"><br>2.在你需要使用微信终端API的文件中导入相应的类。</p>
+<pre><code class="java">import com.tencent.mm.sdk.openapi.WXTextObject;
+</code></pre>
+<p>3.AndroidManifest.xml 设置<br>添加必要的权限支持:</p>
+<pre><code class="xml">&lt;uses-permission android:name=&quot;android.permission.INTERNET&quot;/&gt; 
+&lt;uses-permission android:name=&quot;android.permission.ACCESS_NETWORK_STATE&quot;/&gt; 
+&lt;uses-permission android:name=&quot;android.permission.ACCESS_WIFI_STATE&quot;/&gt;
+&lt;uses-permission android:name=&quot;android.permission.READ_PHONE_STATE&quot;/&gt; 
+&lt;uses-permission android:name=&quot;android.permission.WRITE_EXTERNAL_STORAGE&quot;/&gt;
+</code></pre>
+<h3 id="上拉菜单"><a href="#上拉菜单" class="headerlink" title="上拉菜单"></a>上拉菜单</h3><p><code>PopupWindow</code>的实现.</p>
+<pre><code class="java">public class SNSSharePopupWindows extends PopupWindow {
+    private ImageButton mWeiXinBtn, mWeiBoBtn, mPengYouquanBtn, mQQBtn;
+    private WechatShareManager mWechatShareManager;
+    private WechatShareManager.ShareContentWebpage mShareContentWebpage;
+    private final Toast mToast;
+
+    /**
+     * @param mContext
+     * @param parent
+     */
+    public SNSSharePopupWindows(final Activity mContext, View parent) {
+        super(mContext);
+
+        mWechatShareManager = WechatShareManager.getInstance(mContext);
+        mToast = Toast.makeText(mContext, &quot;&quot;, Toast.LENGTH_SHORT);
+
+        final View view = View.inflate(mContext,
+                R.layout.item_popupsharewindows, null);
+        view.startAnimation(AnimationUtils.loadAnimation(mContext,
+                R.anim.fade_ins));
+        final LinearLayout linearLayout = (LinearLayout) view
+                .findViewById(R.id.share_ll_popup);
+        linearLayout.startAnimation(AnimationUtils.loadAnimation(mContext,
+                R.anim.push_bottom_in));
+
+        setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
+        setHeight(ViewGroup.LayoutParams.MATCH_PARENT);
+        setBackgroundDrawable(new BitmapDrawable());
+        setFocusable(true);
+        setOutsideTouchable(true);
+        setContentView(view);
+        showAtLocation(parent, Gravity.BOTTOM, 0, 0);
+        update();
+
+        //触摸分享框外面的部分,分享弹出框消失.
+        view.setOnTouchListener(new View.OnTouchListener() {
+            public boolean onTouch(View v, MotionEvent event) {
+                int height = view.findViewById(R.id.share_ll_popup).getTop();
+                int y = (int) event.getY();
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+                    if (y &lt; height) {
+                        dismiss();
+                    }
+                }
+                return true;
+            }
+        });
+
+        //四个分享按钮
+        mWeiXinBtn = (ImageButton) view
+                .findViewById(R.id.item_sharepopupwindows_weixin);
+        mPengYouquanBtn = (ImageButton) view
+                .findViewById(R.id.item_sharepopupwindows_pengyouquan);
+        mWeiBoBtn = (ImageButton) view
+                .findViewById(R.id.item_sharepopupwindows_weibo);
+        mQQBtn = (ImageButton) view
+                .findViewById(R.id.item_sharepopupwindows_qq);
+
+        mWeiXinBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //检测是否安装微信
+                if (!checkSNSAvaliable(mWeiXinBtn))
+                    return;
+                if (null != mShareContentWebpage) {
+                    mWechatShareManager.shareByWebchat(mShareContentWebpage,
+                            WechatShareManager.WECHAT_SHARE_TYPE_SESSION);
+                    //分享成功与否,都设为分享结束,对话框消失.
+                    dismiss();
+                }
+            }
+        });
+        mPengYouquanBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!checkSNSAvaliable(mPengYouquanBtn))
+                    return;
+                if (null != mShareContentWebpage) {
+                    mWechatShareManager.shareByWebchat(mShareContentWebpage,
+                            WechatShareManager.WECHAT_SHARE_TYPE_TIMELINE);
+                    //分享成功与否,都设为分享结束,对话框消失.
+                    dismiss();
+                }
+            }
+        });
+    }
+</code></pre>
+<p><code>WechatShareManager</code>是一个单例模式的类,负责管理所有的微信相关的内容的分享.<br>检测微信安装</p>
+<pre><code class="java">    /**
+     * 检测手机上是否安装了微信
+     */
+    public boolean isWebchatAvaliable() {
+        try {
+            mContext.getPackageManager().getPackageInfo(WECHAT_PACKAGE_NAME, PackageManager.GET_ACTIVITIES);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+</code></pre>
+<p>布局文件 <code>item_popupsharewindows.xml</code></p>
+<pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;RelativeLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;match_parent&quot;
+    android:background=&quot;@android:drawable/screen_background_dark_transparent&quot;&gt;
+
+    &lt;LinearLayout
+        android:id=&quot;@+id/share_ll_popup&quot;
+        android:layout_width=&quot;match_parent&quot;
+        android:layout_height=&quot;wrap_content&quot;
+        android:layout_alignParentBottom=&quot;true&quot;
+        android:background=&quot;@color/white&quot;
+        android:orientation=&quot;vertical&quot; &gt;
+
+        &lt;TextView
+            android:layout_width=&quot;match_parent&quot;
+            android:layout_height=&quot;1dp&quot;
+            android:background=&quot;@drawable/list_line&quot; /&gt;
+
+        &lt;LinearLayout
+            android:layout_width=&quot;match_parent&quot;
+            android:layout_height=&quot;55dp&quot;
+            android:orientation=&quot;horizontal&quot;
+            android:gravity=&quot;center&quot;&gt;
+
+            &lt;TextView
+                android:id=&quot;@+id/share_title&quot;
+                android:background=&quot;@drawable/bg_center_selector&quot;
+                android:textColor=&quot;@color/gray&quot;
+                android:layout_width=&quot;wrap_content&quot;
+                android:layout_height=&quot;wrap_content&quot;
+                android:gravity=&quot;center&quot;
+                android:layout_centerVertical=&quot;true&quot;
+                android:layout_gravity=&quot;center&quot;
+                android:textSize=&quot;22sp&quot;
+                android:text=&quot;分享&quot;/&gt;
+        &lt;/LinearLayout&gt;
+
+        &lt;TextView
+            android:layout_width=&quot;match_parent&quot;
+            android:layout_height=&quot;0.5dp&quot;
+            android:background=&quot;@drawable/list_line&quot; /&gt;
+
+        &lt;LinearLayout
+            android:layout_width=&quot;match_parent&quot;
+            android:layout_height=&quot;120dp&quot;
+            android:padding=&quot;@dimen/dimen_10dp&quot;
+            android:orientation=&quot;horizontal&quot; &gt;
+
+            &lt;ImageButton
+                android:id=&quot;@+id/item_sharepopupwindows_weixin&quot;
+                android:layout_width=&quot;wrap_content&quot;
+                android:layout_height=&quot;100dp&quot;
+                android:layout_weight=&quot;1&quot;
+                android:background=&quot;@drawable/bg_center_selector&quot;
+                android:src=&quot;@drawable/share_weixin_btn&quot;
+                android:scaleType=&quot;center&quot;
+             /&gt;
+            &lt;ImageButton
+                android:id=&quot;@+id/item_sharepopupwindows_pengyouquan&quot;
+                android:layout_width=&quot;wrap_content&quot;
+                android:layout_height=&quot;100dp&quot;
+                android:layout_weight=&quot;1&quot;
+                android:background=&quot;@drawable/bg_center_selector&quot;
+                android:src=&quot;@drawable/share_pengyouquan_btn&quot;
+                android:scaleType=&quot;center&quot;
+                /&gt;
+            &lt;ImageButton
+                android:id=&quot;@+id/item_sharepopupwindows_qq&quot;
+                android:layout_width=&quot;wrap_content&quot;
+                android:layout_height=&quot;100dp&quot;
+                android:layout_weight=&quot;1&quot;
+                android:background=&quot;@drawable/bg_center_selector&quot;
+                android:src=&quot;@drawable/share_qq_btn&quot;
+                android:scaleType=&quot;center&quot;
+                /&gt;
+            &lt;ImageButton
+                android:id=&quot;@+id/item_sharepopupwindows_weibo&quot;
+                android:layout_width=&quot;wrap_content&quot;
+                android:layout_height=&quot;100dp&quot;
+                android:layout_weight=&quot;1&quot;
+                android:background=&quot;@drawable/bg_center_selector&quot;
+                android:src=&quot;@drawable/share_weibo_btn&quot;
+                android:scaleType=&quot;center&quot;
+                /&gt;
+        &lt;/LinearLayout&gt;
+    &lt;/LinearLayout&gt;
+
+&lt;/RelativeLayout&gt;
+</code></pre>
+<h3 id="分享流程"><a href="#分享流程" class="headerlink" title="分享流程"></a>分享流程</h3><p>分享过程主要是在<code>WeixinShareManager</code>里面完成的.下面来看看<code>WeixinShareManager</code> 做什么的.</p>
+<pre><code class="java"> ... ...
+    //单例模式初始化
+    private WechatShareManager(Context context) {
+        this.mContext = context;
+        initWechatShare(context);
+    }
+
+ ... ...
+
+    //api注册
+    private void initWechatShare(Context context) {
+        if (mWXApi == null) {
+            mWXApi = WXAPIFactory.createWXAPI(context, WECHAT_APP_ID, true);
+        }
+        mWXApi.registerApp(WECHAT_APP_ID);
+    }
+
+ ... ...
+
+    /*
+     * 分享链接
+     */
+    private void shareWebPage(ShareContent shareContent, int shareType) {
+        // 初始化一个WXTextObject对象
+        WXWebpageObject webpage = new WXWebpageObject();
+        webpage.webpageUrl = shareContent.getURL();
+        // 用WXTextObject对象初始化一个WXMediaMessage对象
+        WXMediaMessage msg = new WXMediaMessage(webpage);
+
+        // 发送文本类型的消息时，title字段不起作用
+        msg.title = shareContent.getTitle();
+        //截取最大长度的标题
+        if (msg.title.length() &gt;= TITILE_SIZE)
+            msg.title = msg.title.substring(0, TITILE_SIZE - 1);
+
+        msg.description = shareContent.getContent();
+        //截取最大长度的描述
+        if (msg.description.length() &gt;= CONTENT_SIZE)
+            msg.description = msg.description.substring(0, CONTENT_SIZE - 1);
+
+        Logger.Log(WechatShareUtil.TAG, &quot;getImageURL &quot; + shareContent.getImageURL() +
+                &quot;\n getPictureResource &quot; + shareContent.getPictureResource() +
+                &quot;\n getTitle&quot; + shareContent.getTitle() +
+                &quot;\n getContent&quot;  + shareContent.getContent() +
+                &quot;\n getURL&quot; + shareContent.getURL());
+
+        boolean useDefaultImage = StringUtils.StrIsNull(shareContent.getImageURL())? true:false;
+        Bitmap thumb = null;
+        if (!useDefaultImage) {
+            thumb = QDApplicationContext.imageLoader.loadImageSync(shareContent.getImageURL(), new ImageSize(THUMB_SIZE,THUMB_SIZE));
+        } else {
+            thumb = BitmapFactory.decodeResource(mContext.getResources(), shareContent.getPictureResource());
+        }
+
+        if (thumb == null) {
+            thumb = BitmapFactory.decodeResource(mContext.getResources(), R.drawable.hos_default_logo);
+        } else {
+            msg.thumbData = WechatShareUtil.bmpToByteArray(thumb, true);
+        }
+
+        // 构造一个Req
+        SendMessageToWX.Req req = new SendMessageToWX.Req();
+        // transaction字段用于唯一标识一个请求 img,video,text等
+        req.transaction = buildTransaction(&quot;webpage&quot;);
+        req.message = msg;
+        req.scene = shareType;
+        // 调用api接口发送数据到微信
+        mWXApi.sendReq(req);
+    }
+</code></pre>
+<p>从上面核心代码看,<code>WeixinShareManager</code>做了这样几件事情:<br>1.注册微信API<br>2.构造WXMediaMessage<br>3.初始化SendMessageToWX.Req,并指定分享类型(网页,图片,文本等等)<br>4.发送分享请求.</p>
+<p>这样就完成了整个的分享过程.<br>图片,文本什么的类似.<br><span class="label label-warning">关于缩略图</span><br><div class="alert alert-warning"><i class="fa fa-bell"></i>  微信关于缩略图的大小有严格的限制的,如果超出限制会分享不成功.(`没有警告,就是分享不成功`)
+我这里采用了100x100的大小做了压缩,我试过120x120不能成功.</div><br></p><p class="text-info">腾讯官方给的Demo里面给出的图片分享的缩略图限制是150x150的.API文档里说明是不超过10M.缩略图大小不超过32KB
+但是没有给出网页分享的缩略图大小.</p><br><img src="\images\wiki\wiki-android-weixinshare\2.png" alt="微信SDK截图"><br>具体的bitmap占内存大小问题,这篇文章可以收藏 <a href="http://bugly.qq.com/bbs/forum.php?mod=viewthread&amp;tid=498" target="_blank" rel="external">Android 开发绕不过的坑：你的 Bitmap 究竟占多大内存？</a><p></p>
+<h3 id="分享之后"><a href="#分享之后" class="headerlink" title="分享之后"></a>分享之后</h3><p>那么如何收到分享成功或者失败的通知呢.<br>微信接受的入口类在<code>packagename.wxapi</code>包下，它的分享结果回调也在这个类<br>微信会在<code>packagename.wxapi</code>找这个回调接口的类，这个类必须是集成了<code>Activity</code>的类，并且实现<code>IWXAPIEventHandler</code>接口<br></p><p class="text-info">这个类的名字一定要是`WXEntryActivity.java`；</p><br>这样，你就可以接受到微信回调结果了：<br>1.现在你的当前工程目录下新建wxapi文件夹并添加类<code>WXEntryActivity.java</code><br><img src="\images\wiki\wiki-android-weixinshare\4.png" alt="微信分享上拉选项"><br>2.这个类<code>WXEntryActivity.java</code>在<code>onCreate</code>中注册API.<br>3.重写<code>onReq</code>回调函数,提示成功或者失败.<p></p>
+<p><code>WXEntryActivity</code></p>
+<pre><code class="java">
+public class WXEntryActivity extends Activity implements IWXAPIEventHandler{
+
+    private static final int TIMELINE_SUPPORTED_VERSION = 0x21020001;
+
+    private Button gotoBtn, regBtn, launchBtn, checkBtn;
+
+    // IWXAPI 是第三方app和微信通信的openapi接口
+    private IWXAPI api;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.entry);
+
+        // 通过WXAPIFactory工厂，获取IWXAPI的实例
+        api = WXAPIFactory.createWXAPI(this, Constants.APP_ID, false);
+
+        regBtn = (Button) findViewById(R.id.reg_btn);
+        regBtn.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                // 将该app注册到微信
+                api.registerApp(Constants.APP_ID);        
+            }
+        });
+
+        gotoBtn = (Button) findViewById(R.id.goto_send_btn);
+        gotoBtn.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(WXEntryActivity.this, SendToWXActivity.class));
+                finish();
+            }
+        });
+
+        launchBtn = (Button) findViewById(R.id.launch_wx_btn);
+        launchBtn.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(WXEntryActivity.this, &quot;launch result = &quot; + api.openWXApp(), Toast.LENGTH_LONG).show();
+            }
+        });
+
+        checkBtn = (Button) findViewById(R.id.check_timeline_supported_btn);
+        checkBtn.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                int wxSdkVersion = api.getWXAppSupportAPI();
+                if (wxSdkVersion &gt;= TIMELINE_SUPPORTED_VERSION) {
+                    Toast.makeText(WXEntryActivity.this, &quot;wxSdkVersion = &quot; + Integer.toHexString(wxSdkVersion) + &quot;\ntimeline supported&quot;, Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(WXEntryActivity.this, &quot;wxSdkVersion = &quot; + Integer.toHexString(wxSdkVersion) + &quot;\ntimeline not supported&quot;, Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
+        api.handleIntent(getIntent(), this);
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+
+        setIntent(intent);
+        api.handleIntent(intent, this);
+    }
+
+    // 微信发送请求到第三方应用时，会回调到该方法
+    @Override
+    public void onReq(BaseReq req) {
+        switch (req.getType()) {
+        case ConstantsAPI.COMMAND_GETMESSAGE_FROM_WX:
+            goToGetMsg();        
+            break;
+        case ConstantsAPI.COMMAND_SHOWMESSAGE_FROM_WX:
+            goToShowMsg((ShowMessageFromWX.Req) req);
+            break;
+        default:
+            break;
+        }
+    }
+
+    // 第三方应用发送到微信的请求处理后的响应结果，会回调到该方法
+    @Override
+    public void onResp(BaseResp resp) {
+        int result = 0;
+
+        switch (resp.errCode) {
+        case BaseResp.ErrCode.ERR_OK:
+            result = R.string.errcode_success;
+            break;
+        case BaseResp.ErrCode.ERR_USER_CANCEL:
+            result = R.string.errcode_cancel;
+            break;
+        case BaseResp.ErrCode.ERR_AUTH_DENIED:
+            result = R.string.errcode_deny;
+            break;
+        default:
+            result = R.string.errcode_unknown;
+            break;
+        }
+
+        Toast.makeText(this, result, Toast.LENGTH_LONG).show();
+    }
+
+    private void goToGetMsg() {
+        Intent intent = new Intent(this, GetFromWXActivity.class);
+        intent.putExtras(getIntent());
+        startActivity(intent);
+        finish();
+    }
+
+    private void goToShowMsg(ShowMessageFromWX.Req showReq) {
+        WXMediaMessage wxMsg = showReq.message;        
+        WXAppExtendObject obj = (WXAppExtendObject) wxMsg.mediaObject;
+
+        StringBuffer msg = new StringBuffer(); // 组织一个待显示的消息内容
+        msg.append(&quot;description: &quot;);
+        msg.append(wxMsg.description);
+        msg.append(&quot;\n&quot;);
+        msg.append(&quot;extInfo: &quot;);
+        msg.append(obj.extInfo);
+        msg.append(&quot;\n&quot;);
+        msg.append(&quot;filePath: &quot;);
+        msg.append(obj.filePath);
+
+        Intent intent = new Intent(this, ShowFromWXActivity.class);
+        intent.putExtra(Constants.ShowMsgActivity.STitle, wxMsg.title);
+        intent.putExtra(Constants.ShowMsgActivity.SMessage, msg.toString());
+        intent.putExtra(Constants.ShowMsgActivity.BAThumbData, wxMsg.thumbData);
+        startActivity(intent);
+        finish();
+    }
+}
+</code></pre>
+<h2 id="后话"><a href="#后话" class="headerlink" title="后话"></a>后话</h2><p>整个过程差不多就是这样.<br>后续再慢慢做补充.<br>关于完成这个功能的时候,我遇到的坑就是缩略图大小问题,后来解决掉了.<br>这一块儿有时间还得研究研究~.</p>
+	  
+	</div>
+
+	<div>
+  	<center>
+	<div class="pagination">
+<ul class="pagination">
+	 
+				
+    	<li class="prev"><a href="/2016/09/01/java-string-to-int/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i>上一页</a></li>
+  		
+
+        <li><a href="/archives"><i class="fa fa-archive"></i>Archive</a></li>
+
+		
+          <li class="next disabled"><a>下一页<i class="fa fa-arrow-circle-o-right"></i></a></li>
+        
+	
+</ul>
+</div>
+
+    </center>
+	</div>
+
+    <!-- share -->
+    
+        
+
+        
+
+    
+	
+	<!-- comment -->
+	
+<section id="comment">
+  <h2 class="title">留言</h2>
+
+  
+</section>
+
+	</div> <!-- col-md-9/col-md-12 -->
+		
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2016-08-12 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/wiki-Android/">wiki-Android<span>1</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/android/">android<span>3</span></a></li> <li><a href="/tags/微信/">微信<span>1</span></a></li> <li><a href="/tags/朋友圈分享/">朋友圈分享<span>1</span></a></li>
+    </ul>
+	</div>
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+	</div>
+		
+
+</div><!-- row -->
+
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  &copy; 2016 Gofan
+  
+      with help from <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a href="http://github.com/wzpan/hexo-theme-freemind/">Freemind</a>.    
+</p> </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<!--<script src="/js/search.js"></script>-->
+<!-- after footer, some 3rd script place here -->
+
+<script src="/js/hljs.js"></script>
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+</body>
+   </html>

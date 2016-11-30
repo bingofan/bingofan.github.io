@@ -1,0 +1,435 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Java 中的类型转换 | Gofan Blog</title>
+  <meta name="author" content="Gofan">
+  
+  <meta name="description" content="本文用于摘要和记录Java语言中一些类型转换相关内容.   部分内容转载自[java int转String所有方式的效率对比与深入解析](http://blog.csdn.net/self_study/article/details/50880110)">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Java 中的类型转换"/>
+  <meta property="og:site_name" content="Gofan Blog"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  
+    <link rel="alternative" href="/atom.xml" title="Gofan Blog" type="application/atom+xml">
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+
+  <!-- CSS -->
+  
+  <link rel="stylesheet" href="/css/themes/bootstrap.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <!--<link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">-->
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.6.0/styles/solarized-light.min.css">
+  <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+  <script src="/js/jquery-2.0.3.min.js"></script>
+  <script src="//cdn.bootcss.com/zclip/1.1.2/jquery.zclip.min.js"></script>
+
+  <!-- analytics -->
+  
+
+
+
+</head>
+
+ <body>
+  <nav id="main-nav" class="navbar navbar-inverse navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+       <a class="navbar-brand" href="/">Gofan Blog</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="查看所有文章.">
+			  <i class="fa fa-archive"></i>存檔
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="查看所有分類.">
+			  <i class="fa fa-folder"></i>分類
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="查看所有標籤.">
+			  <i class="fa fa-tags"></i>標籤
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/wiki" title="筆記整理.">
+			  <i class="fa fa-tasks"></i>Wiki
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="關於本站.">
+			  <i class="fa fa-user"></i>關於
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header page-header-inverse ">		
+			<h1 class="title title-inverse "> Java 中的类型转换</h1>
+		</div>		
+	
+
+
+
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  
+		 <div class="alert alert-success description">
+			<i class="fa fa-info-circle"></i> <p>本文用于摘要和记录Java语言中一些类型转换相关内容.   部分内容转载自<a href="http://blog.csdn.net/self_study/article/details/50880110">java int转String所有方式的效率对比与深入解析</a></p>
+			
+		 </div> <!-- alert -->
+	  		
+
+	  <h2 id="String-和-int-转换"><a href="#String-和-int-转换" class="headerlink" title="String 和 int 转换"></a>String 和 int 转换</h2><h3 id="int-gt-gt-gt-String"><a href="#int-gt-gt-gt-String" class="headerlink" title="int &gt;&gt;&gt; String"></a>int &gt;&gt;&gt; String</h3><p><strong>三种方式</strong> 按效率排序</p>
+<p>1.<code>String s = Integer.toString(i);</code></p>
+<p>2.<code>String s = String.valueOf(i);</code></p>
+<p>3.<code>String s = &quot;&quot; + i;</code></p>
+<a id="more"></a>
+<p>事例程序</p>
+<pre><code class="java">int a = 123456789;
+long start = System.currentTimeMillis();
+for (int i=0; i&lt;100000; i++){
+    String m = a+&quot;&quot;;
+}
+long end = System.currentTimeMillis();
+Log.e(&quot;time&quot;, &quot;a+\&quot;\&quot; = &quot; + (end - start));
+
+start = System.currentTimeMillis();
+for (int i=0; i&lt;100000; i++){
+    String n = String.valueOf(a);
+}
+end = System.currentTimeMillis();
+Log.e(&quot;time&quot;, &quot;String.valueOf(a) = &quot; +(end-start));
+
+start = System.currentTimeMillis();
+for (int i=0; i&lt;100000; i++){
+    String n = Integer.toString(a);
+}
+end = System.currentTimeMillis();
+Log.e(&quot;time&quot;, &quot;Integer.toString(a) = &quot; +(end-start));
+</code></pre>
+<p>最后打印出来的执行时间：</p>
+<pre><code class="java">E/time: Integer.toString(a) = 159
+E/time: String.valueOf(a) = 140
+E/time: a+&quot;&quot; = 257
+</code></pre>
+<p><strong>源码调用方式</strong></p>
+<p>Integer.toString(a)</p>
+<p><code>Integer.toString(a)</code> -&gt; <code>IntegralToString.intToString(a)</code> -&gt; <code>convertInt(null, a)</code></p>
+<p>String.valueOf(a)</p>
+<p><code>String.valueOf(a)</code> -&gt; <code>Integer.toString(a)</code> -&gt; <code>IntegralToString.intToString(a)</code> -&gt; <code>convertInt(null, a)</code></p>
+<p>a+””</p>
+<p>+运算符重载</p>
+<pre><code class="java">StringBuilder sb = new StringBuilder();
+sb.append(&quot;&quot;);
+sb.append(i);
+String strI = sb.toString();
+</code></pre>
+<p><code>append</code>源码</p>
+<p><code>StringBuffer.append</code> -&gt; <code>IntegralToString.appendInt(this, a)</code> -&gt; <code>convertInt(sb, i)</code></p>
+<p><strong><code>convertInt</code></strong>函数</p>
+<pre><code class="java">private static String convertInt(AbstractStringBuilder sb, int i) {
+    boolean negative = false;
+    String quickResult = null;
+    if (i &lt; 0) {
+        negative = true;
+        i = -i;
+        if (i &lt; 100) {
+            if (i &lt; 0) {
+                // If -n is still negative, n is Integer.MIN_VALUE
+                quickResult = &quot;-2147483648&quot;;
+            } else {
+                quickResult = SMALL_NEGATIVE_VALUES[i];
+                if (quickResult == null) {
+                    SMALL_NEGATIVE_VALUES[i] = quickResult =
+                            i &lt; 10 ? stringOf(&#39;-&#39;, ONES[i]) : stringOf(&#39;-&#39;, TENS[i], ONES[i]);
+                }
+            }
+        }
+    } else {
+        if (i &lt; 100) {
+            quickResult = SMALL_NONNEGATIVE_VALUES[i];
+            if (quickResult == null) {
+                SMALL_NONNEGATIVE_VALUES[i] = quickResult =
+                        i &lt; 10 ? stringOf(ONES[i]) : stringOf(TENS[i], ONES[i]);
+            }
+        }
+    }
+    if (quickResult != null) {
+        if (sb != null) {
+            sb.append0(quickResult);
+            return null;
+        }
+        return quickResult;
+    }
+
+    int bufLen = 11; // Max number of chars in result
+    char[] buf = (sb != null) ? BUFFER.get() : new char[bufLen];
+    int cursor = bufLen;
+
+    // Calculate digits two-at-a-time till remaining digits fit in 16 bits
+    while (i &gt;= (1 &lt;&lt; 16)) {
+        // Compute q = n/100 and r = n % 100 as per &quot;Hacker&#39;s Delight&quot; 10-8
+        int q = (int) ((0x51EB851FL * i) &gt;&gt;&gt; 37);
+        int r = i - 100*q;
+        buf[--cursor] = ONES[r];
+        buf[--cursor] = TENS[r];
+        i = q;
+    }
+
+    // Calculate remaining digits one-at-a-time for performance
+    while (i != 0) {
+        // Compute q = n/10 and r = n % 10 as per &quot;Hacker&#39;s Delight&quot; 10-8
+        int q = (0xCCCD * i) &gt;&gt;&gt; 19;
+        int r = i - 10*q;
+        buf[--cursor] = DIGITS[r];
+        i = q;
+    }
+
+    if (negative) {
+        buf[--cursor] = &#39;-&#39;;
+    }
+
+    if (sb != null) {
+        sb.append0(buf, cursor, bufLen - cursor);
+        return null;
+    } else {
+        return new String(cursor, bufLen - cursor, buf);
+    }
+}
+</code></pre>
+<p>分析一下，这个函数的工作主要可以分为这几步：</p>
+<p>1.如果a为负数，将a变成正数，如果a还小于0，直接置为Integer.MIN_VALUE；如果a小于100，则直接使用TENS和ONES数组进行快速计算得出结果，加上’-‘号，直接返回该结果。</p>
+<p>2.如果a为正数并且小于100，直接使用TENS和ONES数组进行快速计算得出结果返回。</p>
+<p>3.如果上面两步没有处理完，说明a是大于100的数字，无法直接使用TENS和ONES数组进行快速计算，处理方式就是2位为一步循环处理，每次将这两位使用TENS和ONES数组进行快速计算得出这两位的结果存在数组的相应位置，直到只剩一位；最后剩下的一位使用DIGITS数组得出16进制的结果放在最后，返回结果。</p>
+<p class="text-danger">那么问题来了，当a>=100的时候，那两次while循环为什么会使用0x51EB851FL和0xCCCD这两个数字呢？
+这个问题不要问我，我也不知道，不过源码作者注释写的很明白了： 去看《Hacker’s Delight》的10-8章。 </p>
+<pre><code class="java">// Compute q = n/100 and r = n % 100 as per &quot;Hacker&#39;s Delight&quot; 10-8 
+// Compute q = n/10 and r = n % 10 as per &quot;Hacker&#39;s Delight&quot; 10-8
+</code></pre>
+<p>TENS和ONES数组，直接看代码，一目了然：</p>
+<pre><code class="java">/** TENS[i] contains the tens digit of the number i, 0 &lt;= i &lt;= 99. */
+private static final char[] TENS = {
+        &#39;0&#39;, &#39;0&#39;, &#39;0&#39;, &#39;0&#39;, &#39;0&#39;, &#39;0&#39;, &#39;0&#39;, &#39;0&#39;, &#39;0&#39;, &#39;0&#39;,
+        &#39;1&#39;, &#39;1&#39;, &#39;1&#39;, &#39;1&#39;, &#39;1&#39;, &#39;1&#39;, &#39;1&#39;, &#39;1&#39;, &#39;1&#39;, &#39;1&#39;,
+        &#39;2&#39;, &#39;2&#39;, &#39;2&#39;, &#39;2&#39;, &#39;2&#39;, &#39;2&#39;, &#39;2&#39;, &#39;2&#39;, &#39;2&#39;, &#39;2&#39;,
+        &#39;3&#39;, &#39;3&#39;, &#39;3&#39;, &#39;3&#39;, &#39;3&#39;, &#39;3&#39;, &#39;3&#39;, &#39;3&#39;, &#39;3&#39;, &#39;3&#39;,
+        &#39;4&#39;, &#39;4&#39;, &#39;4&#39;, &#39;4&#39;, &#39;4&#39;, &#39;4&#39;, &#39;4&#39;, &#39;4&#39;, &#39;4&#39;, &#39;4&#39;,
+        &#39;5&#39;, &#39;5&#39;, &#39;5&#39;, &#39;5&#39;, &#39;5&#39;, &#39;5&#39;, &#39;5&#39;, &#39;5&#39;, &#39;5&#39;, &#39;5&#39;,
+        &#39;6&#39;, &#39;6&#39;, &#39;6&#39;, &#39;6&#39;, &#39;6&#39;, &#39;6&#39;, &#39;6&#39;, &#39;6&#39;, &#39;6&#39;, &#39;6&#39;,
+        &#39;7&#39;, &#39;7&#39;, &#39;7&#39;, &#39;7&#39;, &#39;7&#39;, &#39;7&#39;, &#39;7&#39;, &#39;7&#39;, &#39;7&#39;, &#39;7&#39;,
+        &#39;8&#39;, &#39;8&#39;, &#39;8&#39;, &#39;8&#39;, &#39;8&#39;, &#39;8&#39;, &#39;8&#39;, &#39;8&#39;, &#39;8&#39;, &#39;8&#39;,
+        &#39;9&#39;, &#39;9&#39;, &#39;9&#39;, &#39;9&#39;, &#39;9&#39;, &#39;9&#39;, &#39;9&#39;, &#39;9&#39;, &#39;9&#39;, &#39;9&#39;
+};
+
+/** Ones [i] contains the tens digit of the number i, 0 &lt;= i &lt;= 99. */
+private static final char[] ONES = {
+        &#39;0&#39;, &#39;1&#39;, &#39;2&#39;, &#39;3&#39;, &#39;4&#39;, &#39;5&#39;, &#39;6&#39;, &#39;7&#39;, &#39;8&#39;, &#39;9&#39;,
+        &#39;0&#39;, &#39;1&#39;, &#39;2&#39;, &#39;3&#39;, &#39;4&#39;, &#39;5&#39;, &#39;6&#39;, &#39;7&#39;, &#39;8&#39;, &#39;9&#39;,
+        &#39;0&#39;, &#39;1&#39;, &#39;2&#39;, &#39;3&#39;, &#39;4&#39;, &#39;5&#39;, &#39;6&#39;, &#39;7&#39;, &#39;8&#39;, &#39;9&#39;,
+        &#39;0&#39;, &#39;1&#39;, &#39;2&#39;, &#39;3&#39;, &#39;4&#39;, &#39;5&#39;, &#39;6&#39;, &#39;7&#39;, &#39;8&#39;, &#39;9&#39;,
+        &#39;0&#39;, &#39;1&#39;, &#39;2&#39;, &#39;3&#39;, &#39;4&#39;, &#39;5&#39;, &#39;6&#39;, &#39;7&#39;, &#39;8&#39;, &#39;9&#39;,
+        &#39;0&#39;, &#39;1&#39;, &#39;2&#39;, &#39;3&#39;, &#39;4&#39;, &#39;5&#39;, &#39;6&#39;, &#39;7&#39;, &#39;8&#39;, &#39;9&#39;,
+        &#39;0&#39;, &#39;1&#39;, &#39;2&#39;, &#39;3&#39;, &#39;4&#39;, &#39;5&#39;, &#39;6&#39;, &#39;7&#39;, &#39;8&#39;, &#39;9&#39;,
+        &#39;0&#39;, &#39;1&#39;, &#39;2&#39;, &#39;3&#39;, &#39;4&#39;, &#39;5&#39;, &#39;6&#39;, &#39;7&#39;, &#39;8&#39;, &#39;9&#39;,
+        &#39;0&#39;, &#39;1&#39;, &#39;2&#39;, &#39;3&#39;, &#39;4&#39;, &#39;5&#39;, &#39;6&#39;, &#39;7&#39;, &#39;8&#39;, &#39;9&#39;,
+        &#39;0&#39;, &#39;1&#39;, &#39;2&#39;, &#39;3&#39;, &#39;4&#39;, &#39;5&#39;, &#39;6&#39;, &#39;7&#39;, &#39;8&#39;, &#39;9&#39;,
+};
+</code></pre>
+<p>每个数组都是100的长度，都是用来处理0~99这100个数字，个位和十位的处理方式也很清楚。<br>从代码角度来看，这个算法在数字小于100的和大于100的处理方式是不一样的，小于100的快速计算法执行时间会远远短于大于100的方式</p>
+<h3 id="String-gt-gt-gt-int"><a href="#String-gt-gt-gt-int" class="headerlink" title="String &gt;&gt;&gt; int"></a>String &gt;&gt;&gt; int</h3><p><strong>两种方式</strong> 按效率排序</p>
+<p>1.<code>int i = Integer.parseInt([String]);</code><br>2.<code>int i = Integer.valueOf([String]).initValue();</code></p>
+<p>方法1<br>//直接使用静态方法，不会产生多余的对象，但会抛出异常<br>方法2<br>//Integer.valueOf(s) 相当于 new Integer(Integer.parseInt(s))，也会抛异常，但会多产生一个对象</p>
+<p><strong>源码调用方式</strong></p>
+<p>Integer.parseInt(a)</p>
+<p><code>Integer.parseInt(a)</code> -&gt; <code>parseInt(a, 10);</code> -&gt; <code>parse(a, firstDigitIndex, radix, firstChar == &#39;-&#39;);</code></p>
+<p>Integer.valueOf(a).initValue()</p>
+<p><code>Integer.valueOf(a)</code> -&gt; <code>Integer.valueOf(parseInt(string)).initValue()</code> -&gt; <code>parseInt(a, 10);</code> -&gt; <code>parse(a, firstDigitIndex, radix, firstChar == &#39;-&#39;);</code></p>
+<p>从源码可以清楚的看到其实方法2就是多新建了一个Integer对象存储了int数据而已.实际调用的都一样的.</p>
+	  
+	</div>
+
+	<div>
+  	<center>
+	<div class="pagination">
+<ul class="pagination">
+	 
+				
+    	<li class="prev"><a href="/2016/09/06/hexo-user-guide/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i>上一页</a></li>
+  		
+
+        <li><a href="/archives"><i class="fa fa-archive"></i>Archive</a></li>
+
+		
+		   <li class="next"><a href="/2016/08/12/wiki-android-weixinshare/" class="alignright next">下一页<i class="fa fa-arrow-circle-o-right"></i></a></li>         
+        
+	
+</ul>
+</div>
+
+    </center>
+	</div>
+
+    <!-- share -->
+    
+        
+
+        
+
+    
+	
+	<!-- comment -->
+	
+<section id="comment">
+  <h2 class="title">留言</h2>
+
+  
+</section>
+
+	</div> <!-- col-md-9/col-md-12 -->
+		
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2016-09-01 
+	</div>
+	
+
+	<!-- categories -->
+    
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#categorys"><i class="fa fa-folder"></i></a>	
+    <ul id="categorys" class="tag_box list-unstyled collapse in">
+          
+  <li>
+    <li><a href="/categories/Java/">Java<span>1</span></a></li>
+  </li>
+
+    </ul>
+	</div>
+	
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/Java/">Java<span>1</span></a></li>
+    </ul>
+	</div>
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	   <a data-toggle="collapse" data-target="#toc"><i class="fa fa-bars"></i></a>
+	   <div id="toc" class="toc collapse in">
+			<ol class="toc-article"><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#String-和-int-转换"><span class="toc-article-text">String 和 int 转换</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#int-gt-gt-gt-String"><span class="toc-article-text">int >>> String</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#String-gt-gt-gt-int"><span class="toc-article-text">String >>> int</span></a></li></ol></li></ol>
+		</div>
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+	</div>
+		
+
+</div><!-- row -->
+
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  &copy; 2016 Gofan
+  
+      with help from <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a href="http://github.com/wzpan/hexo-theme-freemind/">Freemind</a>.    
+</p> </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<!--<script src="/js/search.js"></script>-->
+<!-- after footer, some 3rd script place here -->
+
+<script src="/js/hljs.js"></script>
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+</body>
+   </html>
