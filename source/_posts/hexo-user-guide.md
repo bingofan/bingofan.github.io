@@ -368,4 +368,11 @@ deploy:
     branch: master
 ```
 
+### 遇到问题
+
+**执行`hexo deploy`提示`Deployer not found: git`**
+在目录下执行命令
+```shell
+npm install hexo-deployer-git --save
+```
 
